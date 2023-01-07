@@ -1,12 +1,15 @@
+import Landing from "./components/Landing";
 import Nav from "./components/Nav";
-import TestApi from "./components/testingapi";
+import PhotoGallery from "./components/PhotoGallery";
+
 
 
 function App() {
   return (
     <>
     <Nav/>
-    <TestApi/>
+    {/* <Landing/> */}
+    <PhotoGallery/>
     </>
   );
 }
