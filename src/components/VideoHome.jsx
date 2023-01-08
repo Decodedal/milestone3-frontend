@@ -2,19 +2,20 @@ import { Box, Stack, Typography } from '@mui/material'
 import { maxHeight } from '@mui/system'
 import React from 'react'
 import BgVideo from "../assets/landingbg.mp4"
+import PhotoGallery from './PhotoGallery'
 
 
-const Landing = () => {
+const HomeVideo = () => {
   return (
     <Box>
     <Box width="100%" height="100%">
-        <video loop muted
+        <video autoPlay loop muted
         style={{
             width:"100%",
             maxHeight:"100vh",
             objectFit:"cover",
             zIndex:"-1",
-            position:"absolute"
+         
 
         }}
         >
@@ -27,9 +28,9 @@ const Landing = () => {
                 </Typography>
             </Box>
         </Stack> */}
-    </Box>
+    </Box> 
     </Box>
   )
 }
 
-export default Landing
+export default HomeVideo
