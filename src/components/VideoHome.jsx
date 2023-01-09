@@ -1,13 +1,15 @@
-import { Box, Stack, Typography } from '@mui/material'
-import { maxHeight } from '@mui/system'
+import { Box } from '@mui/material'
+
 import React from 'react'
+
 import BgVideo from "../assets/landingbg.mp4"
-import PhotoGallery from './PhotoGallery'
+
 
 
 const HomeVideo = () => {
+
   return (
-    <Box>
+    <Box  >
     <Box width="100%" height="100%">
         <video autoPlay loop muted
         style={{

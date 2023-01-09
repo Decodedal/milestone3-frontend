@@ -13,7 +13,7 @@ const Nav = () => {
     const [open, setOpen] = useState(false)
     const [navOpen, setNavOpen] = useState(false)
   return (
-    <AppBar position='fixed'>
+    <AppBar sx={{position:{xs:"fixed", sm:"sticky"}}}>
         <StyledToolbar>
             <Stack direction='row' alignItems="center">
             <IconButton color='inherit'>

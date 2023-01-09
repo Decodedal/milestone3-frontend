@@ -1,21 +1,21 @@
-import { Button, ImageList, ImageListItem, Paper } from '@mui/material'
-import { Box } from '@mui/system'
+import { Button, Paper } from '@mui/material'
+
 import React from 'react'
 import Carousel from 'react-material-ui-carousel'
+
 import photo1 from "../assets/photo1.jpg"
 import photo2 from "../assets/photo2.jpg"
 import photo3 from "../assets/photo3.jpg"
 import photo4 from "../assets/photo4.jpg"
 import photo5 from "../assets/photo5.jpg"
 import photo6 from "../assets/photo6.jpg"
-import photo7 from "../assets/photo7.jpg"
 import photo8 from "../assets/photo8.jpg"
-import photo9 from "../assets/photo9.jpg"
+
 
 
 
 const PhotoGallery = () => {
-
+ 
     const photoArr = [photo1, photo2, photo3, photo4, photo5, photo6, photo8,] 
 
   return (
@@ -40,7 +40,8 @@ function Item({item})
             backgroundRepeat:"no-repeat",
             // resize
             height:"100vh",
-            width:"100%"
+            width:"100%",
+            
             
 
         }}>

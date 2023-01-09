@@ -7,7 +7,7 @@ import { Box } from '@mui/material'
 const Landing = () => {
   return (
     <>
-    <Box display={{xs:"none", md:"block"}}>
+    <Box display={{xs:"none", md:"block"}} >
     <PhotoGallery/>
     <VideoHome/>
     </Box>
