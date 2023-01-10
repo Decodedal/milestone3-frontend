@@ -6,6 +6,7 @@ import Landing from "./pages/Landing";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Shopping from "./pages/Shopping";
 import TestApi from "./components/testingapi";
+import SingleItem from "./pages/SingleItem";
 
 
 
@@ -18,6 +19,8 @@ function App() {
           <Route path="/" element={<Landing/>}/>
           <Route path="/shop/:category" element={<Shopping/>}/>
           <Route path="/test" element={<TestApi/>}/>
+          <Route path="/:id" element={<SingleItem/>}/>
+
         </Routes>
       </Router>
     </>

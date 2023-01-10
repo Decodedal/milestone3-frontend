@@ -25,7 +25,7 @@ const GalleryItem = ( { item }, { key } ) => {
   return (
     <Grid item xs={12} sm={6} lg={3} >
     <Card sx={{ maxWidth: "100%"}} key={key}>
-    <CardActionArea>
+    <CardActionArea href={`/${item.id}`} >
       <CardMedia
         component="img"
         height="140"
