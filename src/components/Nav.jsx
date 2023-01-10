@@ -16,7 +16,7 @@ const Nav = () => {
     <AppBar sx={{position:{xs:"fixed", sm:"sticky"}}}>
         <StyledToolbar>
             <Stack direction='row' alignItems="center">
-            <IconButton color='inherit'>
+            <IconButton href='/' color='inherit'>
                 <CheckroomOutlined/>
             </IconButton>
             <Typography display={{xs:"none", sm:"inline"}} fontWeight={500}>
@@ -24,10 +24,12 @@ const Nav = () => {
                 </Typography>
             </Stack>
             <Stack direction="row" justifyContent="space-around" minWidth="40%" display={{xs:"none", md:"flex"}}>
-               <Button variant='Outlined'> Mens</Button>
-               <Button variant='Outlined'> Womens</Button>
-               <Button variant='Outlined'> Jewelry</Button>
-               <Button variant='Outlined'> Electronics</Button>
+              
+               <Button href='/shop/all' variant='Outlined'> Shop All</Button>
+               <Button href="/shop/men%27s%20clothing" variant='Outlined'> Mens</Button>
+               <Button href='/shop/women%27s%20clothing' variant='Outlined'> Womens</Button>
+               <Button href='/shop/jewelery' variant='Outlined'> Jewelry</Button>
+               <Button href='/shop/electronics' variant='Outlined'> Electronics</Button>
             </Stack>
             <Stack direction='row'>
                 <IconButton color='inherit'>
@@ -68,10 +70,11 @@ const Nav = () => {
 
                   <Divider sx={{mb: 2}}/>
                   <Stack sx={{height:"30vh"}} justifyContent="space-evenly">
-                  <Button href='#' variant="contained">Mens</Button>
-                  <Button href='#' variant="contained">Womens</Button>
-                  <Button href='#' variant="contained">Jewelry</Button>
-                  <Button href='#' variant="contained">Electronics</Button>
+                  <Button href="/shop/all" variant="contained">Shop All</Button>
+                  <Button href="/shop/men%27s%20clothing"  variant="contained">Mens</Button>
+                  <Button href="/shop/women%27s%20clothing" variant="contained">Womens</Button>
+                  <Button href="/shop/jewelery"  variant="contained">Jewelry</Button>
+                  <Button href="/shop/electronics" variant="contained">Electronics</Button>
                   
                   </Stack>
             </Box>

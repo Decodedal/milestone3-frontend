@@ -5,6 +5,7 @@ import MobilePhotoGallery from "./components/MobilePhotoGallery";
 import Landing from "./pages/Landing";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Shopping from "./pages/Shopping";
+import TestApi from "./components/testingapi";
 
 
 
@@ -15,7 +16,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Landing/>}/>
-          <Route path="/shop" element={<Shopping/>}/> 
+          <Route path="/shop/:category" element={<Shopping/>}/>
+          <Route path="/test" element={<TestApi/>}/>
         </Routes>
       </Router>
     </>
