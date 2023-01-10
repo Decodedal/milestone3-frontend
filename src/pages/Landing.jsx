@@ -3,6 +3,7 @@ import VideoHome from "../components/VideoHome"
 import PhotoGallery from '../components/PhotoGallery'
 import MobilePhotoGallery from '../components/MobilePhotoGallery'
 import { Box } from '@mui/material'
+import Nav from '../components/Nav'
 
 const Landing = () => {
   return (

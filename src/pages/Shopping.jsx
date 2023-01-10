@@ -1,8 +1,9 @@
-import { Grid, Stack } from '@mui/material'
+import { Container, Grid, Stack } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import GalleryItem from '../components/galleryItem'
 import WishList from '../components/WishList'
 import { Params, useParams } from 'react-router-dom'
+
 
 const Shopping = () => {
 
@@ -38,11 +39,13 @@ let{category} = useParams()
   return (
     <>
     <Stack direction="row" justifyContent="center" alignItems="center">
-    <WishList/>
-    <Stack flex={4}>
-        <Grid container>
+  
+    <Stack flex={4} mt={1}>
+        <Container>
+        <Grid container spacing={4}>
             {mappedItems}
         </Grid>
+        </Container>
     </Stack>
     </Stack>
     </>
