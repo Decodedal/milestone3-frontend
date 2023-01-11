@@ -6,7 +6,7 @@ const [items , setitems] = useState([])
 
 useEffect(()=>{
    const getData = async() =>{
-   const resdata = await fetch('https://fakestoreapi.com/products/categories')
+   const resdata = await fetch('https://fakestoreapi.com/products/category/men\'s clothing')
    const parsedData = await resdata.json()
    setitems(parsedData)
 //    window.localStorage.setItem('test',JSON.stringify(parsedData))

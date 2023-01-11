@@ -37,6 +37,7 @@ const GalleryItem = ( { item }, { key } ) => {
         {item.title}
         </Typography>
       </CardContent>
+      </CardActionArea>
       <CardActions disableSpacing>
       <IconButton  aria-label="add to favorites">
         <Checkbox icon={<FavoriteBorder/>} checkedIcon={<Favorite sx={{color:'red'}}/>}/>
@@ -50,7 +51,7 @@ const GalleryItem = ( { item }, { key } ) => {
           <ExpandMoreIcon />
         </ExpandMore>
       </CardActions>
-      </CardActionArea>
+      
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
         <Typography variant="body2"   color="text.secondary">
