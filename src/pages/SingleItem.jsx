@@ -30,7 +30,7 @@ useEffect(()=>{
   return (
     <>
     <Stack direction={{xs:"column", md:"row"}}  height="100vh" alignItems={"center"}>
-    <Stack maxHeight={"100vh"} alignItems={{xs:'center', lg:"flex-end"}} width={{xs:"100%", md:"50%"}}  flex={1}>
+    <Stack maxHeight={"100vh"} alignItems='center' width={{xs:"100%", md:"50%"}} justifyContent="center" flex={1}>
 
      <img style={{width:"70%"}} src={item.image} alt={item.title}/>
     </Stack>
