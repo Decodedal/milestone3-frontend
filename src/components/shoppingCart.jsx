@@ -1,8 +1,17 @@
-import { Close, ShoppingCartOutlined } from '@mui/icons-material'
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Divider, Drawer, IconButton, Stack, Typography } from '@mui/material'
-import React, {useContext, useState} from 'react'
-import { CartContext } from '../context/CartContext'
+import { Close, ShoppingCartOutlined } from '@mui/icons-material';
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Divider, Drawer, IconButton, Stack, styled, Typography } from '@mui/material';
+import React, {useContext, useState} from 'react';
+import { CartContext } from '../context/CartContext';
+import Badge from '@mui/material/Badge';
 
+const StyledBadge = styled(Badge)(({ theme }) => ({
+    '& .MuiBadge-badge': {
+      right: -5,
+      top: 13,
+      border: `2px solid ${theme.palette.background.paper}`,
+      padding: '0 4px',
+    },
+  }));
 
 const ShoppingCart = () => {
 
@@ -20,12 +29,42 @@ const ShoppingCart = () => {
         }
     }
    
+    // const handleAdd = (id) =>{
+    //     let index
+    //     for(let i = 0; i<cart.length; i++){
+    //         if(cart.id === id){
+    //             index = i
+    //         } 
+    //     }
+    //     setCart(...cart,cart[index].quantity + 1)
+    // }
+    
+    const handleAddToCart = (clickedItem) => { 
+    setCart((prev) => {
+        const isItemInCart = prev.find((item) => item.id === clickedItem.id);
+  
+        if (isItemInCart) {
+          return prev.map((item) =>
+            item.id === clickedItem.id
+              ? { ...item, quantity: item.quantity + 1 }
+              : item
+          );
+        }
+  
+        return [...prev, { ...clickedItem, quantity: 1 }];
+      });
+    };
+    
 
   return (
     <>
+ 
     <IconButton onClick={e=> handleCartOpen()} color='inherit'>
+        <StyledBadge badgeContent={cart.length} color="secondary">
          <ShoppingCartOutlined />
+        </StyledBadge>
     </IconButton>
+    
                
                 <Drawer 
           
@@ -49,22 +88,23 @@ const ShoppingCart = () => {
               <IconButton onClick={e => setCartOpen(false)}  sx={{mb: 2}}>
                     <Close />
                   </IconButton>
+                  <span>Cart</span>
 
                   <Divider sx={{mb: 2}}/>
-                  <Typography> 
-                        Cart
-                    </Typography>
-                  <Stack sx={{height:"30vh"}} justifyContent="space-evenly">
+                  
+                  <Stack sx={{height:"100vh"}} gap={3} justifyContent="space-evenly">
                     {/* will return items in cart as a list of cards and should stop it from breaking if their are no items in the cart */}
                     {
                         cart.length != 0 ? 
                         cart.map((item, key) =>{
                             return(
-                                <Card key={key} sx={{ maxWidth: 200 }}>
+                                <>
+                                <Card key={key} sx={{ maxWidth: 400, backgroundSize:"contain" }}>
                                 <CardMedia
                                   component="img"
-                                  alt="green iguana"
+                                  alt={item.title}
                                   height="100"
+                                  
                                   image = {item.image}
                                 />
                                 <CardContent>
@@ -76,10 +116,17 @@ const ShoppingCart = () => {
                                   </Typography>
                                 </CardContent>
                                 <CardActions>
-                                  <Button size="small">Share</Button>
-                                  <Button size="small">Learn More</Button>
+                                <Stack direction="row" justifyContent="space-between" alignItems="space-between">
+                                  <Button onClick={((item) => setCart(cart => cart[key].quantity++))} size="small">+</Button>
+                                        <Typography m={1}>
+                                            {item.quantity}
+                                        </Typography>
+                                  <Button size="small">-</Button>
+                                </Stack>
                                 </CardActions>
                               </Card>
+                              </>
+                              
                             )
                         })
                         :"nothing to see here"
