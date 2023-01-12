@@ -39,21 +39,21 @@ const ShoppingCart = () => {
     //     setCart(...cart,cart[index].quantity + 1)
     // }
     
-    const handleAddToCart = (clickedItem) => { 
-    setCart((prev) => {
-        const isItemInCart = prev.find((item) => item.id === clickedItem.id);
+    // const handleAddToCart = (clickedItem) => { 
+    // setCart((prev) => {
+    //     const isItemInCart = prev.find((item) => item.id === clickedItem.id);
   
-        if (isItemInCart) {
-          return prev.map((item) =>
-            item.id === clickedItem.id
-              ? { ...item, quantity: item.quantity + 1 }
-              : item
-          );
-        }
+    //     if (isItemInCart) {
+    //       return prev.map((item) =>
+    //         item.id === clickedItem.id
+    //           ? { ...item, quantity: item.quantity + 1 }
+    //           : item
+    //       );
+    //     }
   
-        return [...prev, { ...clickedItem, quantity: 1 }];
-      });
-    };
+    //     return [...prev, { ...clickedItem, quantity: 1 }];
+    //   });
+    // };
     
 
   return (
@@ -102,24 +102,24 @@ const ShoppingCart = () => {
                                 <Card key={key} sx={{ maxWidth: 400, backgroundSize:"contain" }}>
                                 <CardMedia
                                   component="img"
-                                  alt={item.title}
+                                  // alt={item.title}
                                   height="100"
                                   
-                                  image = {item.image}
+                                  // image = {item.image}
                                 />
                                 <CardContent>
                                   <Typography gutterBottom component="div">
-                                    {item.title}
+                                    {/* {item.title} */}
                                   </Typography>
                                   <Typography variant="body2" color="text.secondary">
-                                    {item.size === "select a size" ? "" : item.size}
+                                    {/* {item.size === "select a size" ? "" : item.size} */}
                                   </Typography>
                                 </CardContent>
                                 <CardActions>
                                 <Stack direction="row" justifyContent="space-between" alignItems="space-between">
-                                  <Button onClick={((item) => setCart(cart => cart[key].quantity++))} size="small">+</Button>
+                                  {/* <Button onClick={((item) => handleAddToCart(item))} size="small">+</Button> */}
                                         <Typography m={1}>
-                                            {item.quantity}
+                                            {/* {item.quantity} */}
                                         </Typography>
                                   <Button size="small">-</Button>
                                 </Stack>

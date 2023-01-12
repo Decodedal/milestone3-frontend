@@ -1,5 +1,6 @@
 import { AddShoppingCart } from '@mui/icons-material'
 import { Box, Button, ButtonGroup, Divider, Paper, Stack, Typography } from '@mui/material'
+import { click } from '@testing-library/user-event/dist/click'
 import React, { useContext, useEffect, useState } from 'react'
 import { json, useParams } from 'react-router-dom'
 import { CartContext } from '../context/CartContext'
@@ -71,14 +72,39 @@ useEffect(()=>{
   window.localStorage.setItem('style_central_cart', JSON.stringify(cart))
  },[cart])
 
- const localCart = () =>{
-  return(
-    setCart([{
-      id:item.id,
-      quantity:1
-    }])
-  )
-}
+//  const localCart = () =>{
+//   if(cart.length === 0 ){
+//     return(
+//       setCart([...cart,{
+//         id:item.id,
+//         quantity:1
+//       }])
+//     )
+//   }
+//  const updateCart = cart.map((cart)=> cart.id === item.id ? cart["quantity"] +=1 : console.log("not the same"))
+//   return(
+//    setCart(updateCart)
+//   )
+// }
+
+
+
+const handleAddToCart = (clickedItem) => {
+  setCart((prev) => {
+    const isItemInCart = prev.find((item) => item.id === clickedItem.id);
+
+    if (isItemInCart) {
+      return prev.map((item) =>
+        item.id === clickedItem.id
+          ? { id:clickedItem.id, quantity: item.quantity + 1 }
+          : item
+      );
+    }
+
+    return [...prev, { id:item.id, quantity: 1 }];
+ });
+};
+
 
 
 
@@ -117,7 +143,7 @@ useEffect(()=>{
     Size:  {size}
     </Box>
     {/* <Button onClick={()=>addToCart()} sx={{marginTop:"5px"}}> */}
-    <Button onClick={()=>localCart()} sx={{marginTop:"5px"}}>
+    <Button onClick={()=> handleAddToCart(item)} sx={{marginTop:"5px"}}>
       <AddShoppingCart/>
         Add To Cart
     </Button>
