@@ -43,7 +43,6 @@ const ShoppingCart = () => {
       const getData = async() =>{
       const resdata = await fetch(`https://fakestoreapi.com/products/${cartItem.id}`)
       let parsedData = await resdata.json()
-      parsedData.quantity = cartItem.quantity
       itemArr.push(parsedData)
       }
    
