@@ -16,7 +16,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 const ShoppingCart = () => {
 
     const {cart, setCart}  = useContext(CartContext)
-    const [item, setItem] = useState([])
+    // const [item, setItem] = useState([])
 
     const [cartOpen, setCartOpen] = useState(false)
 
@@ -37,21 +37,21 @@ const ShoppingCart = () => {
      },[])
 
   //uses cart data to call product info from api I see this as a safty measure so that the user can only alter product id or quantity from local storage if they were savy. 
-     useEffect(()=>{
-      const itemArr = []
-      cart.map((cartItem) =>{
-      const getData = async() =>{
-      const resdata = await fetch(`https://fakestoreapi.com/products/${cartItem.id}`)
-      let parsedData = await resdata.json()
-      itemArr.push(parsedData)
-      }
+  //    useEffect(()=>{
+  //     const itemArr = []
+  //     cart.map((cartItem) =>{
+  //     const getData = async() =>{
+  //     const resdata = await fetch(`https://fakestoreapi.com/products/${cartItem.id}`)
+  //     let parsedData = await resdata.json()
+  //     itemArr.push(parsedData)
+  //     }
    
-      getData()
-    })
-    setItem(itemArr)
-   },[])
+  //     getData()
+  //   })
+  //   setItem(itemArr)
+  //  },[])
 
-   console.log(item)
+  //  console.log(item)
 //   useEffect(()=>{
 //     const getData = async() =>{
 //     const resdata = await fetch(`https://fakestoreapi.com/products/1`)
@@ -111,7 +111,6 @@ const ShoppingCart = () => {
                         cart.length != 0 ? 
                         cart.map((item, key) =>{
                             return(
-                                <>
                                 <Card key={key} sx={{ maxWidth: 400, backgroundSize:"contain" }}>
                                 <CardMedia
                                   component="img"
@@ -138,7 +137,7 @@ const ShoppingCart = () => {
                                 </Stack>
                                 </CardActions>
                               </Card>
-                              </>
+                              
                               
                             )
                         })

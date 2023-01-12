@@ -89,6 +89,22 @@ useEffect(()=>{
 
 
 
+// const handleAddToCart = (clickedItem) => {
+//   setCart((prev) => {
+//     const isItemInCart = prev.find((item) => item.id === clickedItem.id);
+
+//     if (isItemInCart) {
+//       return prev.map((item) =>
+//         item.id === clickedItem.id
+//           ? { id:clickedItem.id, quantity: item.quantity + 1 }
+//           : item
+//       );
+//     }
+
+//     return [...prev, { id:item.id, quantity: 1 }];
+//  });
+// };
+
 const handleAddToCart = (clickedItem) => {
   setCart((prev) => {
     const isItemInCart = prev.find((item) => item.id === clickedItem.id);
@@ -96,16 +112,14 @@ const handleAddToCart = (clickedItem) => {
     if (isItemInCart) {
       return prev.map((item) =>
         item.id === clickedItem.id
-          ? { id:clickedItem.id, quantity: item.quantity + 1 }
-          : item
+          ? { ...item, quantity: item.quantity + 1, size:size }
+          : {...item, size:size}
       );
     }
 
-    return [...prev, { id:item.id, quantity: 1 }];
- });
+    return [...prev, { ...clickedItem, quantity: 1 , size:size }];
+  });
 };
-
-
 
 
   return (
