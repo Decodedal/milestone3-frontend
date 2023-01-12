@@ -1,33 +1,58 @@
 import { AddShoppingCart } from '@mui/icons-material'
 import { Box, Button, ButtonGroup, Divider, Paper, Stack, Typography } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { json, useParams } from 'react-router-dom'
 import { CartContext } from '../context/CartContext'
 
 const SingleItem = () => {
     // gets us access to cart state so we can set cart contents
-    const { cart, setCart } = useContext(CartContext)
+
+
+    
+        
+
 
     const { id } = useParams()
 
     const [item , setitem] = useState([])
     const [size, setSize] = useState(["select a size"])
+    const { cart, setCart } = useContext(CartContext)
    
 
     const handleSize = (size) => setSize(size)
 
-    const addToCart = () =>{
-      return(
-        setCart([{
-          id: item.id,
-          title:item.title,
-          image:item.image,
-          size:size, 
-         price:item.price,
-         }])
-      )
-    }
 
+    //checks if cart is empty will simply add to cart if it is not it loops through finds the index that matches the item id and incrments its quanitity by 1. 
+    // const addToCart = () =>{
+    //   if(cart.length != 0){
+    //     let index 
+    //     for(let i = 0; i<cart.length; i++){
+    //       if(item.id === cart[i].id){
+    //       index = i
+    //       }
+    //     } 
+    //     return setCart(...cart[index].quantity += 1)
+    //   }
+    //   return(
+    //     setCart([...cart,{
+    //       id: item.id,
+    //       title:item.title,
+    //       image:item.image,
+    //       size:size, 
+    //       price:item.price,
+    //       quantity:1
+    //      }])
+    //   )
+    // }
+
+  
+
+    useEffect(()=>{
+      const data = window.localStorage.getItem('style_central_cart');
+      if (data != null) setCart(JSON.parse(data))
+        console.log(data)
+     },[])
+    
 
 useEffect(()=>{
    const getData = async() =>{
@@ -39,7 +64,23 @@ useEffect(()=>{
 
    getData()
 },[])
- console.log(item)
+//  console.log(item)
+
+
+ useEffect(()=>{
+  window.localStorage.setItem('style_central_cart', JSON.stringify(cart))
+ },[cart])
+
+ const localCart = () =>{
+  return(
+    setCart([{
+      id:item.id,
+      quantity:1
+    }])
+  )
+}
+
+
 
   return (
     <>
@@ -75,7 +116,8 @@ useEffect(()=>{
    <Box display={item.category === "men's clothing" || item.category === "women's clothing" ? "block" : "none" }>
     Size:  {size}
     </Box>
-    <Button onClick={()=>addToCart()} sx={{marginTop:"5px"}}>
+    {/* <Button onClick={()=>addToCart()} sx={{marginTop:"5px"}}> */}
+    <Button onClick={()=>localCart()} sx={{marginTop:"5px"}}>
       <AddShoppingCart/>
         Add To Cart
     </Button>
