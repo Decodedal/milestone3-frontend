@@ -7,12 +7,18 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Shopping from "./pages/Shopping";
 import TestApi from "./components/testingapi";
 import SingleItem from "./pages/SingleItem";
+import { CartContext } from "./context/CartContext";
+import { useState } from "react";
 
 
 
 function App() {
+
+  const [cart, setCart] = useState([])
+
   return (
     <>
+    <CartContext.Provider value={{cart, setCart}}>
       <Nav/>
       <Router>
         <Routes>
@@ -23,6 +29,7 @@ function App() {
 
         </Routes>
       </Router>
+      </CartContext.Provider>
     </>
   );
 }

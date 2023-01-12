@@ -2,6 +2,8 @@ import { CheckroomOutlined, Login, ShoppingCartOutlined, Menu as NavMenu, Close 
 import { AppBar, Button, Divider, Drawer, IconButton, Menu, MenuItem, Toolbar, Typography } from '@mui/material'
 import { Box, Stack, styled } from '@mui/system'
 import React, { useState } from 'react'
+import MenuLogin from './MenuLogin'
+import ShoppingCart from './shoppingCart'
 
 const StyledToolbar = styled(Toolbar)({
     display:"flex",
@@ -10,7 +12,7 @@ const StyledToolbar = styled(Toolbar)({
 })
 
 const Nav = () => {
-    const [open, setOpen] = useState(false)
+  
     const [navOpen, setNavOpen] = useState(false)
   return (
     <AppBar sx={{position:{xs:"fixed", sm:"sticky"}}}>
@@ -32,15 +34,8 @@ const Nav = () => {
                <Button href='/shop/electronics' variant='Outlined'> Electronics</Button>
             </Stack>
             <Stack direction='row'>
-                <IconButton color='inherit'>
-                    <ShoppingCartOutlined />
-                </IconButton>
-            <Box display={{xs:"none", md:"block"}}>
-                <IconButton onClick={e => setOpen(true)} color='inherit'>
-                   <Login/>
-                </IconButton>
-                <Button variant='Outlined' onClick={e => setOpen(true)}> Login</Button>
-                </Box>
+                <ShoppingCart/>
+                <MenuLogin/>
                 <IconButton onClick={e=> setNavOpen(true)} color='inherit' sx={{display:{sm:"block", md:"none"}}}> 
                     <NavMenu/>
                 </IconButton>
@@ -79,24 +74,7 @@ const Nav = () => {
                   </Stack>
             </Box>
         </Drawer>
-                <Menu
-        id="demo-positioned-menu"
-        aria-labelledby="demo-positioned-button"
-        open={open}
-        onClose={e=>setOpen(false)}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-      >
-        <MenuItem>My WishList</MenuItem>
-        <MenuItem>Logout</MenuItem>
-        <MenuItem>Create Account</MenuItem>
-      </Menu>
+   
         </StyledToolbar>
     </AppBar>
   )

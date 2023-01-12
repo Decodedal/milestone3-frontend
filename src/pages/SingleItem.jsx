@@ -1,9 +1,12 @@
 import { AddShoppingCart } from '@mui/icons-material'
 import { Box, Button, ButtonGroup, Divider, Paper, Stack, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { CartContext } from '../context/CartContext'
 
 const SingleItem = () => {
+    // gets us access to cart state so we can set cart contents
+    const { cart, setCart } = useContext(CartContext)
 
     const { id } = useParams()
 
@@ -13,6 +16,17 @@ const SingleItem = () => {
 
     const handleSize = (size) => setSize(size)
 
+    const addToCart = () =>{
+      return(
+        setCart([{
+          id: item.id,
+          title:item.title,
+          image:item.image,
+          size:size, 
+         price:item.price,
+         }])
+      )
+    }
 
 
 useEffect(()=>{
@@ -61,7 +75,7 @@ useEffect(()=>{
    <Box display={item.category === "men's clothing" || item.category === "women's clothing" ? "block" : "none" }>
     Size:  {size}
     </Box>
-    <Button sx={{marginTop:"5px"}}>
+    <Button onClick={()=>addToCart()} sx={{marginTop:"5px"}}>
       <AddShoppingCart/>
         Add To Cart
     </Button>
