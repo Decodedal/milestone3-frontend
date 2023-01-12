@@ -25,7 +25,7 @@ function App() {
           <Route path="/" element={<Landing/>}/>
           <Route path="/shop/:category" element={<Shopping/>}/>
           <Route path="/test" element={<TestApi/>}/>
-          <Route path="/:id" element={<SingleItem/>}/>
+          <Route path="/:id" element={<SingleItem handleAddToCart/>}/>
 
         </Routes>
       </Router>
