@@ -16,7 +16,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 const ShoppingCart = () => {
 
     const {cart, setCart}  = useContext(CartContext)
-    // const [item, setItem] = useState([])
+  
 
     const [cartOpen, setCartOpen] = useState(false)
 
@@ -36,37 +36,48 @@ const ShoppingCart = () => {
       if (data != null) setCart(JSON.parse(data))
      },[])
 
-  //uses cart data to call product info from api I see this as a safty measure so that the user can only alter product id or quantity from local storage if they were savy. 
-  //    useEffect(()=>{
-  //     const itemArr = []
-  //     cart.map((cartItem) =>{
-  //     const getData = async() =>{
-  //     const resdata = await fetch(`https://fakestoreapi.com/products/${cartItem.id}`)
-  //     let parsedData = await resdata.json()
-  //     itemArr.push(parsedData)
-  //     }
-   
-  //     getData()
-  //   })
-  //   setItem(itemArr)
-  //  },[])
+//adds to the cart when plus button is clicked 
+  const handleAddToCart = (clickedItem) => {
+  setCart((prev) => {
+    const isItemInCart = prev.find((item) => item.id === clickedItem.id);
 
-  //  console.log(item)
-//   useEffect(()=>{
-//     const getData = async() =>{
-//     const resdata = await fetch(`https://fakestoreapi.com/products/1`)
-//     let parsedData = await resdata.json()
-//     setItem(parsedData)
-//     console.log(parsedData)
-//  //    window.localStorage.setItem('test',JSON.stringify(parsedData))
-//     }
- 
-//     getData()
-//  },[])
+    if (isItemInCart) {
+      return prev.map((item) =>
+        item.id === clickedItem.id
+          ? { ...item, quantity: item.quantity + 1}
+          : item
+      );
+    }
+    return [...prev];
+  });
+};
 
-    // useEffect(()=>{
-    //   window.localStorage.setItem('style_central_cart', JSON.stringify(cart))
-    //  },[cart])
+const handleSubtractFromCart = (id) => {
+  setCart((prev) =>
+    prev.reduce((acc, item) => {
+      if (item.id === id) {
+        if (item.quantity === 1) return [...acc, item];
+        return [...acc, { ...item, quantity: item.quantity - 1 }];
+      } else {
+        return [...acc, item];
+      }
+    }, [])
+  );
+};
+
+const handleRemoveFromCart = (id) => {
+  setCart((prev) => 
+    prev.reduce((acc , item) =>{
+      if(item.id === id){
+        return acc
+      } else {
+        return [...acc, item];
+      }
+    },[])
+  )
+}
+
+
     
 
   return (
@@ -129,12 +140,13 @@ const ShoppingCart = () => {
                                 </CardContent>
                                 <CardActions>
                                 <Stack direction="row" justifyContent="space-between" alignItems="space-between">
-                                  {/* <Button onClick={((item) => handleAddToCart(item))} size="small">+</Button> */}
+                                  <Button onClick={(() => handleAddToCart(item))} size="small">+</Button>
                                         <Typography m={1}>
                                             {item.quantity}
                                         </Typography>
-                                  <Button size="small">-</Button>
+                                  <Button onClick={(() => handleSubtractFromCart(item.id))} size="small">-</Button>
                                 </Stack>
+                                <Button onClick={(() => handleRemoveFromCart(item.id))}>Delete</Button>
                                 </CardActions>
                               </Card>
                               
