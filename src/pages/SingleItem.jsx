@@ -60,6 +60,7 @@ const handleAddToCart = (clickedItem) => {
   if(size === "select a size"){
     return setMessage("Select a size before adding to cart.")
   }
+  setMessage("Item added to cart")
   setCart((prev) => {
     const isItemInCart = prev.find((item) => item.id === clickedItem.id);
 
@@ -110,7 +111,7 @@ const handleAddToCart = (clickedItem) => {
    <Box display={size === null ? "none" : "block" }>
     Size:  {size}
     </Box>
-    <p style={{color:"red", fontWeight:"bold"}}>{message}</p>
+    <Typography fontSize={"bold"} color={message[0] === "S" ? "Red" : "Green"}>{message}</Typography>
     <Button onClick={()=> handleAddToCart(item)} sx={{marginTop:"5px"}}>
       <AddShoppingCart/>
         Add To Cart

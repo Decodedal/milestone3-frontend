@@ -17,7 +17,6 @@ const ShoppingCart = () => {
 
     
   
-    const [cartChanged, setCartChanged] = useState(false)
     const [cartOpen, setCartOpen] = useState(false)
 
     const {cart, setCart}  = useContext(CartContext)
@@ -49,7 +48,6 @@ const ShoppingCart = () => {
   const handleAddToCart = (clickedItem) => {
   setCart((prev) => {
     const isItemInCart = prev.find((item) => item.id === clickedItem.id);
-    setCartChanged(true)
     if (isItemInCart) {
       return prev.map((item) =>
         item.id === clickedItem.id
@@ -86,7 +84,11 @@ const handleRemoveFromCart = (id) => {
   )
 }
 
-
+const cartTotal = (cart) => {
+  return(
+    cart.reduce((acc, cartItem)=> acc + cartItem.quantity * cartItem.price, 0)
+  )
+}
     
 
   return (
@@ -115,15 +117,23 @@ const handleRemoveFromCart = (id) => {
             <Box sx={{
                   p: 2,
                 
-                  backgroundColor: "primary.light",
+                  backgroundColor: "paper",
                 }}>
               {/* The inside of the drawer */}
+              <Stack direction={"row"} alignItems="center" justifyContent={"space-between"}>
               <IconButton onClick={e => setCartOpen(false)}  sx={{mb: 2}}>
                     <Close />
                   </IconButton>
-                  <span>Cart</span>
+                  <Typography fontWeight={"bold"}>Your Cart</Typography>
+                  </Stack>
+                  <Stack direction={"row"} alignItems="center" justifyContent={"space-between"}>
+                  <Typography>Total: ${cartTotal(cart).toFixed(2)}</Typography>
+                  <Button width="100%" variant='contained'>
+                    Checkout
+                  </Button>
+                  </Stack>
 
-                  <Divider sx={{mb: 2}}/>
+                  <Divider sx={{mb: 2, mt:2}}/>
                   
                   <Stack sx={{minHeight:"100vh"}} gap={3} justifyContent="space-evenly">
                     {/* will return items in cart as a list of cards and should stop it from breaking if their are no items in the cart */}
@@ -143,25 +153,33 @@ const handleRemoveFromCart = (id) => {
                                   <Typography gutterBottom component="div">
                                     {item.title}
                                   </Typography>
+                                  <Stack direction={"row"} alignItems="center" justifyContent={"space-between"}>
                                   <Typography variant="body2" color="text.secondary">
                                     {item.size === "select a size" ? "" : item.size}
                                   </Typography>
+                                  <Typography variant="body2" color="text.secondary">
+                                    price: ${item.price}
+                                  </Typography>
+                                  </Stack>
                                 </CardContent>
                                 <CardActions>
-                                <Stack direction="row" justifyContent="space-between" alignItems="space-between">
+                                <Stack direction="row" alignItems="center">
                                   <Button onClick={(() => handleAddToCart(item))} size="small">+</Button>
+                                        
                                         <Typography m={1}>
                                             {item.quantity}
                                         </Typography>
+
                                   <Button onClick={(() => handleSubtractFromCart(item.id))} size="small">-</Button>
-                                </Stack>
+                                
                                 <Button onClick={(() => handleRemoveFromCart(item.id))}>Delete</Button>
+                                <Typography ml={4}>Total: ${(item.quantity * item.price).toFixed(2)}</Typography>
+                                </Stack>
                                 </CardActions>
                               </Card>
-                              
-                              
                             )
                         })
+                        
                         :"nothing to see here"
                     }
                     <Divider/>
