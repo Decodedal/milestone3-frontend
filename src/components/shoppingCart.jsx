@@ -1,6 +1,6 @@
 import { Close, ShoppingCartOutlined } from '@mui/icons-material';
 import { Box, Button, Card, CardActions, CardContent, CardMedia, Divider, Drawer, IconButton, Stack, styled, Typography } from '@mui/material';
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import { CartContext } from '../context/CartContext';
 import Badge from '@mui/material/Badge';
 
@@ -15,12 +15,12 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const ShoppingCart = () => {
 
-    const {cart, setCart}  = useContext(CartContext)
+    
   
-
+    const [cartChanged, setCartChanged] = useState(false)
     const [cartOpen, setCartOpen] = useState(false)
 
-    
+    const {cart, setCart}  = useContext(CartContext)
 
     const handleCartOpen = () => {
         if(cart.length === 0){
@@ -34,13 +34,22 @@ const ShoppingCart = () => {
     useEffect(()=>{
       const data = window.localStorage.getItem('style_central_cart');
       if (data != null) setCart(JSON.parse(data))
+      console.log("get cart in cart")
      },[])
+
+     useCallback(()=>{
+      window.localStorage.setItem('style_central_cart', JSON.stringify(cart))
+      console.log("THis is the problem")
+   
+     },[cart])
+
+    
 
 //adds to the cart when plus button is clicked 
   const handleAddToCart = (clickedItem) => {
   setCart((prev) => {
     const isItemInCart = prev.find((item) => item.id === clickedItem.id);
-
+    setCartChanged(true)
     if (isItemInCart) {
       return prev.map((item) =>
         item.id === clickedItem.id

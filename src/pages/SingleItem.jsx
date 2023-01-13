@@ -51,6 +51,7 @@ const SingleItem = () => {
     useEffect(()=>{
       const data = window.localStorage.getItem('style_central_cart');
       if (data != null) setCart(JSON.parse(data))
+      console.log("Get cart for single page")
         console.log(data)
      },[])
     
@@ -70,6 +71,7 @@ useEffect(()=>{
 
  useEffect(()=>{
   window.localStorage.setItem('style_central_cart', JSON.stringify(cart))
+  console.log("setcart from page")
  },[cart])
 
 //  const localCart = () =>{
