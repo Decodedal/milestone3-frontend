@@ -114,7 +114,7 @@ const handleRemoveFromCart = (id) => {
             
             <Box sx={{
                   p: 2,
-                  height: 1,
+                
                   backgroundColor: "primary.light",
                 }}>
               {/* The inside of the drawer */}
@@ -125,7 +125,7 @@ const handleRemoveFromCart = (id) => {
 
                   <Divider sx={{mb: 2}}/>
                   
-                  <Stack sx={{height:"100vh"}} gap={3} justifyContent="space-evenly">
+                  <Stack sx={{minHeight:"100vh"}} gap={3} justifyContent="space-evenly">
                     {/* will return items in cart as a list of cards and should stop it from breaking if their are no items in the cart */}
                     {
                         cart.length != 0 ? 
