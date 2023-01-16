@@ -1,6 +1,8 @@
 import { Login } from '@mui/icons-material'
 import { Box, Button, IconButton, Menu, MenuItem } from '@mui/material'
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import SignUpForm from '../pages/SignUpForm'
 
 const MenuLogin = () => {
     const [open, setOpen] = useState(false)
@@ -28,7 +30,7 @@ const MenuLogin = () => {
       >
         <MenuItem>My WishList</MenuItem>
         <MenuItem>Logout</MenuItem>
-        <MenuItem>Create Account</MenuItem>
+        <MenuItem><Button href='/signup'>Create Account</Button></MenuItem>
      </Menu>
      </Box>
   )
