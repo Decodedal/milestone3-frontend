@@ -9,6 +9,7 @@ import TestApi from "./components/testingapi";
 import SingleItem from "./pages/SingleItem";
 import { CartContext } from "./context/CartContext";
 import { useState } from "react";
+import PageNotFound from "./pages/404";
 
 
 
@@ -25,7 +26,8 @@ function App() {
           <Route path="/" element={<Landing/>}/>
           <Route path="/shop/:category" element={<Shopping/>}/>
           <Route path="/test" element={<TestApi/>}/>
-          <Route path="/:id" element={<SingleItem handleAddToCart/>}/>
+          <Route path="/item/:id" element={<SingleItem handleAddToCart/>}/>
+          
 
         </Routes>
       </Router>
