@@ -1,18 +1,29 @@
 import { Login } from '@mui/icons-material'
-import { Box, Button, IconButton, Menu, MenuItem } from '@mui/material'
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import SignUpForm from '../pages/SignUpForm'
+import { Avatar, Box, Button, IconButton, Menu, MenuItem, styled } from '@mui/material'
+import userEvent from '@testing-library/user-event'
+import React, { useState, useContext } from 'react'
+import { CurrentUser } from '../context/UserContext'
 
-const MenuLogin = () => {
+const StyledButton= styled(Button)({
+  color:"inherit",
+  fontWeight:"bold",
+
+})
+
+const MenuLogin = ({ show }) => {
     const [open, setOpen] = useState(false)
+
+    const {currentUser, setCurrentUser} = useContext(CurrentUser)
+
+    // const userAvatar = 
+
   return (
     
-    <Box display={{xs:"none", md:"block"}}>
+    <Box display={show}>
         <IconButton onClick={e => setOpen(true)} color='inherit'>
            <Login/>
         </IconButton>
-        <Button variant='Outlined' onClick={e => setOpen(true)}> Login</Button>
+        <Button variant='Outlined' onClick={e => setOpen(true)}>{currentUser === null ? "Login" : <Avatar sx={{backgroundColor:"#0b07f5"}}>{currentUser.firstName[0]}{currentUser.lastName[0]}</Avatar>}</Button>
     
     <Menu
         id="demo-positioned-menu"
@@ -28,9 +39,9 @@ const MenuLogin = () => {
           horizontal: 'right',
         }}
       >
-        <MenuItem>My WishList</MenuItem>
-        <MenuItem>Logout</MenuItem>
-        <MenuItem><Button href='/signup'>Create Account</Button></MenuItem>
+        <MenuItem><StyledButton color='inherit' href='/login'>Login</StyledButton></MenuItem>
+        <MenuItem><StyledButton color='inherit' href='/signup'>Create Account</StyledButton></MenuItem>
+        <MenuItem><StyledButton>Logout</StyledButton></MenuItem>
      </Menu>
      </Box>
   )

@@ -1,7 +1,7 @@
-import { CheckroomOutlined, Login, ShoppingCartOutlined, Menu as NavMenu, Close } from '@mui/icons-material'
-import { AppBar, Button, Divider, Drawer, IconButton, Menu, MenuItem, Toolbar, Typography } from '@mui/material'
+import { CheckroomOutlined, Menu as NavMenu, Close } from '@mui/icons-material'
+import { AppBar, Button, Divider, Drawer, IconButton,Toolbar, Typography } from '@mui/material'
 import { Box, Stack, styled } from '@mui/system'
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import MenuLogin from './MenuLogin'
 import ShoppingCart from './shoppingCart'
 
@@ -14,6 +14,9 @@ const StyledToolbar = styled(Toolbar)({
 const Nav = () => {
   
     const [navOpen, setNavOpen] = useState(false)
+
+    
+
   return (
     <AppBar sx={{position:{xs:"fixed", sm:"sticky"}}}>
         <StyledToolbar>
@@ -35,7 +38,7 @@ const Nav = () => {
             </Stack>
             <Stack direction='row'>
                 <ShoppingCart/>
-                <MenuLogin/>
+                <MenuLogin show ={{xs:"none", md:"block" }} />
                 <IconButton onClick={e=> setNavOpen(true)} color='inherit' sx={{display:{sm:"block", md:"none"}}}> 
                     <NavMenu/>
                 </IconButton>
@@ -56,13 +59,13 @@ const Nav = () => {
             <Box sx={{
                   p: 2,
                   height: 1,
-                  backgroundColor: "primary.light",
+                  backgroundColor: "paper",
                 }}>
               {/* The inside of the drawer */}
               <IconButton onClick={e => setNavOpen(false)}  sx={{mb: 2}}>
                     <Close />
                   </IconButton>
-
+                  <MenuLogin show={"block"}/>
                   <Divider sx={{mb: 2}}/>
                   <Stack sx={{height:"30vh"}} justifyContent="space-evenly">
                   <Button href="/shop/all" variant="contained">Shop All</Button>
@@ -70,7 +73,6 @@ const Nav = () => {
                   <Button href="/shop/women%27s%20clothing" variant="contained">Womens</Button>
                   <Button href="/shop/jewelery"  variant="contained">Jewelry</Button>
                   <Button href="/shop/electronics" variant="contained">Electronics</Button>
-                  
                   </Stack>
             </Box>
         </Drawer>
