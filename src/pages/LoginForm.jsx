@@ -13,66 +13,48 @@ const LoginForm = () => {
   const navigate = useNavigate()
   
 
-  const [user, setUser] = useState({
-    first_name:'',
-    last_name:'',
-    email:''
-  })
+const [credentials, setCredentials] = useState({
+    email:'',
+    password:'',
+})
+
+const [errorMessage, setErrorMessage] = useState(null)
+
+
 
   async function handleSubmit(e){
     e.preventDefault()
-
-    await fetch('http://localhost:4000/users/',{
-        method:"POST",
-        headers:{
-            'Content-Type' : 'application/json'
-        },
-        body: JSON.stringify(user)
-    })
-        navigate('/shop/all')
   }
 
 // function handleSubmit(){
-//     console.log(JSON.stringify(user))
+//     console.log(JSON.stringify(credentials))
 // }
 
-console.log(user)
+
     return (
     <Stack  height="100vh" alignItems={"center"} justifyContent="center">
         
         <h1>Login</h1>
         <form onSubmit={handleSubmit} autoComplete="off">
         <Stack width={"50vw"}  height="50vh" alignItems="center" justifyContent="space-around">
-          
-                {/* <label htmlFor='first_name'>FirstName</label> */}
-                {/* <StyledTextfield
-                 label="First name"
-                 variant='outlined'
-                 fullWidth
-                 required
-                 onChange={e => setUser({...user, first_name:e.target.value})}
-                 name='first_name'
-                 />
-            
-            
-            <StyledTextfield
-                 label="Last name"
-                 variant='outlined'
-                 fullWidth
-                 required
-                 onChange={e => setUser({...user, last_name:e.target.value})}
-                 name='last_name'
-                 /> */}
-            
-            
+              
             <StyledTextfield
                  label="Email"
                  variant='outlined'
                  fullWidth
                  required
-                 onChange={e => setUser({...user, email:e.target.value})}
+                 onChange={e => setCredentials({...credentials, email:e.target.value})}
                  name='email'
                  />
+
+            <StyledTextfield
+                 label="Password"
+                 variant='outlined'
+                 fullWidth
+                 required
+                 onChange={e => setCredentials({...credentials, password:e.target.value})}
+                 name='password'
+                 />   
             
             <Button fullWidth onClick={e => handleSubmit(e)} variant="contained">Submit</Button>
             </Stack>

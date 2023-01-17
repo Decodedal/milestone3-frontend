@@ -20,9 +20,9 @@ const MenuLogin = ({ show }) => {
   return (
     
     <Box display={show}>
-        <IconButton onClick={e => setOpen(true)} color='inherit'>
+        <IconButton sx={{transform:"translatex(50%)"}} onClick={e => setOpen(true)} color='inherit'>
            <Login/>
-        </IconButton>
+        </IconButton> 
         <Button variant='Outlined' onClick={e => setOpen(true)}>{currentUser === null ? "Login" : <Avatar sx={{backgroundColor:"#0b07f5"}}>{currentUser.firstName[0]}{currentUser.lastName[0]}</Avatar>}</Button>
     
     <Menu
@@ -39,7 +39,7 @@ const MenuLogin = ({ show }) => {
           horizontal: 'right',
         }}
       >
-        <MenuItem><StyledButton color='inherit' href='/login'>Login</StyledButton></MenuItem>
+        <MenuItem>{ currentUser === null ? <StyledButton color='inherit' href='/login'>Login</StyledButton> : `Hello ${currentUser.firstName} ${currentUser.lastName}`}</MenuItem>
         <MenuItem><StyledButton color='inherit' href='/signup'>Create Account</StyledButton></MenuItem>
         <MenuItem><StyledButton>Logout</StyledButton></MenuItem>
      </Menu>
