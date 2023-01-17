@@ -1,16 +1,22 @@
-import { Box, Stack, TextField } from '@mui/material'
+import { Box, Button, Stack, styled, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+
+const StyledTextfield= styled(TextField)({
+    marginTop:20,
+    marginBottom:20,
+    display:"block"
+})
+
 const SignUpForm = () => {
   const navigate = useNavigate()
-
+  
 
   const [user, setUser] = useState({
-    firstName:'',
-    lastName:'',
-    email:'',
-    password:''
+    first_name:'',
+    last_name:'',
+    email:''
   })
 
   async function handleSubmit(e){
@@ -26,47 +32,49 @@ const SignUpForm = () => {
         navigate('/shop/all')
   }
 
+// function handleSubmit(){
+//     console.log(JSON.stringify(user))
+// }
+
+console.log(user)
     return (
-    <Stack bgcolor={"red"} height="100vh" alignItems={"center"} justifyContent="center">
+    <Stack  height="100vh" alignItems={"center"} justifyContent="center">
         
         <h1>Sign Up</h1>
         <form onSubmit={handleSubmit} autoComplete="off">
-        <Stack width={"50vw"} bgcolor={"yellow"} height="50vh" alignItems="center" justifyContent="space-around">
-            <Box >
+        <Stack width={"50vw"}  height="50vh" alignItems="center" justifyContent="space-around">
+          
                 {/* <label htmlFor='first_name'>FirstName</label> */}
-                <TextField label="firstname"
+                <StyledTextfield
+                 label="First name"
                  variant='outlined'
                  fullWidth
                  required
+                 onChange={e => setUser({...user, first_name:e.target.value})}
+                 name='first_name'
                  />
-                <input
-                    required
-                    value={user.firstName}
-                    onChange={e => setUser({...user, firstName:e.target.value})}
-                    id="first_name"
-                    name='first_name' 
-                    />
-            </Box>
-            <Box>
-                <label htmlFor='last_name'>LastName</label>
-                <input
-                    required
-                    value={user.lastName}
-                    onChange={e => setUser({...user, lastName:e.target.value})}
-                    id="last_name"
-                    name='last_name' 
-                    />
-            </Box>
-            <Box>
-                <label htmlFor='email'>Email</label>
-                <input
-                    required
-                    value={user.email}
-                    onChange={e => setUser({...user, email:e.target.value})}
-                    id='email'
-                    name='email' 
-                    />
-            </Box>
+            
+            
+            <StyledTextfield
+                 label="Last name"
+                 variant='outlined'
+                 fullWidth
+                 required
+                 onChange={e => setUser({...user, last_name:e.target.value})}
+                 name='last_name'
+                 />
+            
+            
+            <StyledTextfield
+                 label="Email"
+                 variant='outlined'
+                 fullWidth
+                 required
+                 onChange={e => setUser({...user, email:e.target.value})}
+                 name='email'
+                 />
+            
+            <Button fullWidth onClick={e => handleSubmit(e)} variant="contained">Submit</Button>
             </Stack>
         </form>
         
