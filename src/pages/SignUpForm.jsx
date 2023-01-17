@@ -16,7 +16,8 @@ const SignUpForm = () => {
   const [user, setUser] = useState({
     first_name:'',
     last_name:'',
-    email:''
+    email:'',
+    password:''
   })
 
   async function handleSubmit(e){
@@ -72,6 +73,15 @@ console.log(user)
                  required
                  onChange={e => setUser({...user, email:e.target.value})}
                  name='email'
+                 />
+
+            <StyledTextfield
+                 label="password"
+                 variant='outlined'
+                 fullWidth
+                 required
+                 onChange={e => setUser({...user, password:e.target.value})}
+                 name='password'
                  />
             
             <Button fullWidth onClick={e => handleSubmit(e)} variant="contained">Submit</Button>

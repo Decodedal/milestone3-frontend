@@ -1,6 +1,7 @@
-import { Box, Button, Stack, styled, TextField } from '@mui/material'
-import React, { useState } from 'react'
+import { Box, Button, Stack, styled, TextField, Typography } from '@mui/material'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { CurrentUser } from '../context/UserContext'
 
 
 const StyledTextfield= styled(TextField)({
@@ -12,6 +13,7 @@ const StyledTextfield= styled(TextField)({
 const LoginForm = () => {
   const navigate = useNavigate()
   
+  const {currentUser, setCurrentUser} = useContext(CurrentUser)
 
 const [credentials, setCredentials] = useState({
     email:'',
@@ -22,9 +24,31 @@ const [errorMessage, setErrorMessage] = useState(null)
 
 
 
-  async function handleSubmit(e){
+   
+async function handleSubmit(e) {
     e.preventDefault()
-  }
+    const response = await fetch(`http://localhost:4000/authentication/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(credentials)
+    })
+
+    const data = await response.json()
+
+    if(response.status === 200){
+        setCurrentUser(data.user)
+        navigate('/shop/all')
+  
+    }else{
+        setErrorMessage(data.message)
+    }
+
+    
+}
+  
+
 
 // function handleSubmit(){
 //     console.log(JSON.stringify(credentials))
@@ -33,8 +57,8 @@ const [errorMessage, setErrorMessage] = useState(null)
 
     return (
     <Stack  height="100vh" alignItems={"center"} justifyContent="center">
-        
         <h1>Login</h1>
+        <Typography mt={2} color="red" fontWeight={"bold"}>{errorMessage}</Typography>
         <form onSubmit={handleSubmit} autoComplete="off">
         <Stack width={"50vw"}  height="50vh" alignItems="center" justifyContent="space-around">
               

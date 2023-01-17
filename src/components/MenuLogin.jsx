@@ -23,7 +23,7 @@ const MenuLogin = ({ show }) => {
         <IconButton sx={{transform:"translatex(50%)"}} onClick={e => setOpen(true)} color='inherit'>
            <Login/>
         </IconButton> 
-        <Button variant='Outlined' onClick={e => setOpen(true)}>{currentUser === null ? "Login" : <Avatar sx={{backgroundColor:"#0b07f5"}}>{currentUser.firstName[0]}{currentUser.lastName[0]}</Avatar>}</Button>
+        <Button variant='Outlined' onClick={e => setOpen(true)}>{currentUser === null ? "Login" : <Avatar sx={{backgroundColor:"#0b07f5"}}>{currentUser.first_name[0]}{currentUser.last_name[0]}</Avatar>}</Button>
     
     <Menu
         id="demo-positioned-menu"
@@ -39,9 +39,9 @@ const MenuLogin = ({ show }) => {
           horizontal: 'right',
         }}
       >
-        <MenuItem>{ currentUser === null ? <StyledButton color='inherit' href='/login'>Login</StyledButton> : `Hello ${currentUser.firstName} ${currentUser.lastName}`}</MenuItem>
-        <MenuItem><StyledButton color='inherit' href='/signup'>Create Account</StyledButton></MenuItem>
-        <MenuItem><StyledButton>Logout</StyledButton></MenuItem>
+        <MenuItem>{ currentUser === null ? <StyledButton fullWidth color='inherit' href='/login'>Login</StyledButton> : `Hello ${currentUser.firstName} ${currentUser.lastName}`}</MenuItem>
+        <MenuItem><StyledButton fullWidth color='inherit' href='/signup'>Create Account</StyledButton></MenuItem>
+        <MenuItem><StyledButton fullWidth>Logout</StyledButton></MenuItem>
      </Menu>
      </Box>
   )
