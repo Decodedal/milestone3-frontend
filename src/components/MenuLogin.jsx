@@ -10,12 +10,18 @@ const StyledButton= styled(Button)({
 
 })
 
+
+
 const MenuLogin = ({ show }) => {
     const [open, setOpen] = useState(false)
 
     const {currentUser, setCurrentUser} = useContext(CurrentUser)
 
-    // const userAvatar = 
+    const handleLogout = () =>{
+      setCurrentUser(null)
+      localStorage.clear()
+      window.location.reload()
+    }
 
   return (
     
@@ -39,9 +45,9 @@ const MenuLogin = ({ show }) => {
           horizontal: 'right',
         }}
       >
-        <MenuItem>{ currentUser === null ? <StyledButton fullWidth color='inherit' href='/login'>Login</StyledButton> : `Hello ${currentUser.firstName} ${currentUser.lastName}`}</MenuItem>
+        <MenuItem>{ currentUser === null ? <StyledButton fullWidth color='inherit' href='/login'>Login</StyledButton> :<StyledButton>Hello {currentUser.first_name} {currentUser.last_name}</StyledButton>}</MenuItem>
         <MenuItem><StyledButton fullWidth color='inherit' href='/signup'>Create Account</StyledButton></MenuItem>
-        <MenuItem><StyledButton fullWidth>Logout</StyledButton></MenuItem>
+        <MenuItem><StyledButton fullWidth onClick={() => handleLogout()}>Logout</StyledButton></MenuItem>
      </Menu>
      </Box>
   )
