@@ -36,11 +36,11 @@ const ShoppingCart = () => {
       console.log("get cart in cart")
      },[])
 
-     useCallback(()=>{
-      window.localStorage.setItem('style_central_cart', JSON.stringify(cart))
-      console.log("THis is the problem")
+    //  useCallback(()=>{
+    //   window.localStorage.setItem('style_central_cart', JSON.stringify(cart))
+    //   console.log("THis is the problem")
    
-     },[cart])
+    //  },[cart])
 
     
 

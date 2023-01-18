@@ -26,11 +26,11 @@ const SingleItem = () => {
 
   
 
-    useEffect(()=>{
-      const data = window.localStorage.getItem('style_central_cart');
-      if (data != null) setCart(JSON.parse(data))
-      console.log("Get cart for single page")
-     },[])
+    // useEffect(()=>{
+    //   const data = window.localStorage.getItem('style_central_cart');
+    //   if (data != null) setCart(JSON.parse(data))
+    //   console.log("Get cart for single page")
+    //  },[])
     
 
 useEffect(()=>{
