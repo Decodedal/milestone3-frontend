@@ -39,6 +39,7 @@ async function handleSubmit(e) {
 
     if(response.status === 200){
         setCurrentUser(data.user)
+        localStorage.setItem('token', data.token)
         navigate('/shop/all')
   
     }else{
