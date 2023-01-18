@@ -1,7 +1,8 @@
 import { Favorite, FavoriteBorder } from '@mui/icons-material'
 import { Card, CardActionArea, CardActions, CardContent, CardMedia, Checkbox, Collapse, Grid, IconButton, styled, Typography } from '@mui/material'
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { CurrentUser } from '../context/UserContext'
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -16,11 +17,25 @@ const ExpandMore = styled((props) => {
 
 const GalleryItem = ( { item }, { key } ) => {
 
+    const {currentUser, setCurrentUser} = useContext(CurrentUser)
+
+    const [message, setMessage]=useState(null)
+
     const [expanded, setExpanded] = useState(false);
       
     const handleExpandClick = () => {
       setExpanded(!expanded);
     };
+
+    //warns user that they must be signed in to use items and then removes the meassage after 4 seconds
+    const handeSetMessage = () =>{
+        setMessage("You must be signed in to Like items")
+       
+           setTimeout(() => {
+            setMessage(null)
+           }, 4000);
+       
+    }
 
   return (
     <Grid item xs={12} sm={6} lg={3} >
@@ -36,12 +51,21 @@ const GalleryItem = ( { item }, { key } ) => {
         <Typography gutterBottom variant="h5" component="div">
         {item.title}
         </Typography>
+        <Typography color="red">{message}</Typography>
       </CardContent>
       </CardActionArea>
       <CardActions disableSpacing>
-      <IconButton  aria-label="add to favorites">
+      
+        { currentUser === null ? 
+        <IconButton onClick={() => handeSetMessage()}  aria-label="add to favorites">
+        <Checkbox disabled icon={<FavoriteBorder/>}/>
+        </IconButton> 
+        : 
+        <IconButton  aria-label="add to favorites">
         <Checkbox icon={<FavoriteBorder/>} checkedIcon={<Favorite sx={{color:'red'}}/>}/>
-      </IconButton>
+        </IconButton>
+        }
+        
     <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
