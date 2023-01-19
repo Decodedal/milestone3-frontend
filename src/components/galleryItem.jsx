@@ -1,8 +1,9 @@
 import { Favorite, FavoriteBorder } from '@mui/icons-material'
-import { Card, CardActionArea, CardActions, CardContent, CardMedia, Checkbox, Collapse, Grid, IconButton, styled, Typography } from '@mui/material'
+import { Box, Card, CardActionArea, CardActions, CardContent, CardMedia, Checkbox, Collapse, Grid, IconButton, styled, Typography } from '@mui/material'
 import { useState, useContext, useEffect } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { CurrentUser } from '../context/UserContext'
+import { CartContext } from '../context/CartContext';
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -22,6 +23,14 @@ const GalleryItem = ( { item }, { key } ) => {
     const [message, setMessage]=useState(null)
 
     const [expanded, setExpanded] = useState(false);
+
+    const[checked, setChecked] = useState(false)
+
+    const handleCheck = () =>{
+      setChecked(!checked)
+    }
+
+    
       
     const handleExpandClick = () => {
       setExpanded(!expanded);
@@ -36,6 +45,37 @@ const GalleryItem = ( { item }, { key } ) => {
            }, 4000);
        
     }
+
+    useState(async()=>{
+      const resData = await fetch(`http://localhost:4000/items/${currentUser.user_id}`)
+      const parsedData = await resData.json()
+      for(let i of parsedData){
+        if(i.item_id === item.id){
+          setChecked(true)
+          console.log(checked)
+        }
+      }
+      
+    },[])
+
+    
+    
+    const handleLike = ( async(item, bool) => {
+        setChecked(!checked)
+        await fetch('http://localhost:4000/items/like',{
+            method:"POST",
+            headers:{
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify({
+              user_id: currentUser.user_id,
+              item_id: item.id,
+              liked: bool
+            })
+        })
+        console.log(checked)
+    })
+   
 
   return (
     <Grid item xs={12} sm={6} lg={3} >
@@ -56,14 +96,26 @@ const GalleryItem = ( { item }, { key } ) => {
       </CardActionArea>
       <CardActions disableSpacing>
       
+      {/* if their is no current user the checkbox is diabled */}
         { currentUser === null ? 
         <IconButton onClick={() => handeSetMessage()}  aria-label="add to favorites">
         <Checkbox disabled icon={<FavoriteBorder/>}/>
         </IconButton> 
         : 
-        <IconButton  aria-label="add to favorites">
-        <Checkbox icon={<FavoriteBorder/>} checkedIcon={<Favorite sx={{color:'red'}}/>}/>
-        </IconButton>
+        <Box  aria-label="add to favorites">
+          {/* runs function to update database based on item being liked or not */}
+        {
+          checked === false 
+          ?
+          <IconButton onClick={()=> handleLike(item, true)}>
+          <FavoriteBorder/>
+          </IconButton>
+          :
+          <IconButton onClick={()=> handleLike(item, false)}>
+          <Favorite sx={{color:'red'}}/>
+          </IconButton>
+        }
+        </Box>
         }
         
     <ExpandMore

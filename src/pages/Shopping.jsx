@@ -9,7 +9,7 @@ import { CartContext } from '../context/CartContext'
 const Shopping = () => {
 
 let{category} = useParams()
-
+    
     const [items , setitems] = useState([])
     const { cart, setCart } = useContext(CartContext)
 
@@ -42,18 +42,30 @@ let{category} = useParams()
       
        },[cart])
 
-     console.log(category)
+     console.log(mappedItems.length)
+
+
   return (
     <>
     <Stack direction="row" justifyContent="center" alignItems="center">
-  
-    <Stack flex={4} mt={1}>
+     { mappedItems.length < 10
+     ?
+     <Stack minHeight={"100vh"} justifyContent={"center"} flex={4} >
         <Container>
         <Grid container spacing={4}>
             {mappedItems}
         </Grid>
         </Container>
     </Stack>
+     :
+    <Stack flex={4} mt={6}>
+        <Container>
+        <Grid container spacing={4}>
+            {mappedItems}
+        </Grid>
+        </Container>
+    </Stack>
+    }
     </Stack>
     </>
   )
