@@ -2,6 +2,7 @@ import { Box, Button, Stack, styled, TextField, Typography } from '@mui/material
 import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { CurrentUser } from '../context/UserContext'
+import { CartContext } from '../context/CartContext';
 
 
 const StyledTextfield= styled(TextField)({
@@ -15,6 +16,8 @@ const LoginForm = () => {
   
   const {currentUser, setCurrentUser} = useContext(CurrentUser)
 
+  const {cart, setCart}  = useContext(CartContext)
+
 const [credentials, setCredentials] = useState({
     email:'',
     password:'',
@@ -22,7 +25,21 @@ const [credentials, setCredentials] = useState({
 
 const [errorMessage, setErrorMessage] = useState(null)
 
-
+const updateCartFromDB= async(data) =>{
+    const cartUpdater = []
+    const resData = await fetch(`http://localhost:4000/items/${data.user_id}`)
+    const parsedData = await resData.json()
+    for(let item of parsedData){
+        if(item.cart === true){
+            const resdata = await fetch(`https://fakestoreapi.com/products/${item.item_id}`)
+            let parsedData = await resdata.json()
+            cartUpdater.push({...parsedData, quantity:item.quantity})
+        }
+    }
+    
+    // return localStorage.setItem("style_central_cart", JSON.stringify(cartUpdater))
+    return setCart(cartUpdater)
+}
 
    
 async function handleSubmit(e) {
@@ -40,6 +57,8 @@ async function handleSubmit(e) {
     if(response.status === 200){
         setCurrentUser(data.user)
         localStorage.setItem('token', data.token)
+        updateCartFromDB(data.user)
+        // console.log(data.user.user_id)
         navigate('/shop/all')
   
     }else{

@@ -59,7 +59,7 @@ const GalleryItem = ( { item }, { key } ) => {
     },[])
 
     
-    
+    //when an item checked status changes db entry is created or updated
     const handleLike = ( async(item, bool) => {
         setChecked(!checked)
         await fetch('http://localhost:4000/items/like',{

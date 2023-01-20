@@ -11,6 +11,7 @@ import PageNotFound from "./pages/404";
 import SignUpForm from "./pages/SignUpForm";
 import LoginForm from "./pages/LoginForm";
 import CurrentUserProvider from "./context/UserContext";
+import WishList from "./pages/wishList";
 
 
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/shop/:category" element={<Shopping/>}/>
           <Route path="/test" element={<TestApi/>}/>
           <Route path="/:id" element={<SingleItem handleAddToCart/>}/>
+          <Route path="/wish" element={<WishList/>}/>
           <Route path="*" element={<PageNotFound/>}/>
 
         </Routes>

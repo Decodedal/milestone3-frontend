@@ -35,13 +35,6 @@ const ShoppingCart = () => {
       if (data != null) setCart(JSON.parse(data))
       console.log("get cart in cart")
      },[])
-
-    //  useCallback(()=>{
-    //   window.localStorage.setItem('style_central_cart', JSON.stringify(cart))
-    //   console.log("THis is the problem")
-   
-    //  },[cart])
-
     
 
 //adds to the cart when plus button is clicked 
@@ -86,11 +79,11 @@ const handleRemoveFromCart = (id) => {
 
 const cartTotal = (cart) => {
   return(
-    cart.reduce((acc, cartItem)=> acc + cartItem.quantity * cartItem.price, 0)
+    cart.reduce((acc, cartItem)=> acc + Number(cartItem.quantity) * Number(cartItem.price), 0)
   )
 }
     
-
+console.log(cart)
   return (
     <>
  
@@ -167,13 +160,13 @@ const cartTotal = (cart) => {
                                   <Button onClick={(() => handleAddToCart(item))} size="small">+</Button>
                                         
                                         <Typography m={1}>
-                                            {item.quantity}
+                                            {parseInt(item.quantity)}
                                         </Typography>
 
                                   <Button onClick={(() => handleSubtractFromCart(item.id))} size="small">-</Button>
                                 
                                 <Button onClick={(() => handleRemoveFromCart(item.id))}>Delete</Button>
-                                <Typography ml={4}>Total: ${(item.quantity * item.price).toFixed(2)}</Typography>
+                                <Typography ml={4}>Total: ${(parseInt(item.quantity) * parseInt(item.price)).toFixed(2)}</Typography>
                                 </Stack>
                                 </CardActions>
                               </Card>

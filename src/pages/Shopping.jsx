@@ -1,7 +1,7 @@
 import { Container, Grid, Stack } from '@mui/material'
 import React, { useEffect, useState, useContext } from 'react'
 import GalleryItem from '../components/galleryItem'
-import WishList from '../components/WishList'
+
 import { Params, useParams } from 'react-router-dom'
 import { CartContext } from '../context/CartContext'
 
