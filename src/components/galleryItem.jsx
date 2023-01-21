@@ -3,7 +3,7 @@ import { Box, Card, CardActionArea, CardActions, CardContent, CardMedia, Checkbo
 import { useState, useContext, useEffect } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { CurrentUser } from '../context/UserContext'
-import { CartContext } from '../context/CartContext';
+
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -26,6 +26,7 @@ const GalleryItem = ( { item }, { key } ) => {
 
     const[checked, setChecked] = useState(false)
 
+
     const handleCheck = () =>{
       setChecked(!checked)
     }
@@ -45,9 +46,10 @@ const GalleryItem = ( { item }, { key } ) => {
            }, 4000);
        
     }
-
+//fetch dbdata for item likes
     useState(async()=>{
-      const resData = await fetch(`http://localhost:4000/items/${currentUser.user_id}`)
+      if(currentUser !== null){
+      const resData = await fetch(`https://style-central-bakcend.onrender.com/items/${currentUser.user_id}`)
       const parsedData = await resData.json()
       for(let i of parsedData){
         if(i.item_id === item.id){
@@ -55,14 +57,14 @@ const GalleryItem = ( { item }, { key } ) => {
           console.log(checked)
         }
       }
-      
+    }
     },[])
 
     
     //when an item checked status changes db entry is created or updated
     const handleLike = ( async(item, bool) => {
         setChecked(!checked)
-        await fetch('http://localhost:4000/items/like',{
+        await fetch('https://style-central-bakcend.onrender.com/items/like',{
             method:"POST",
             headers:{
                 'Content-Type' : 'application/json'

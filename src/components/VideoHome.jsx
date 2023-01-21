@@ -9,7 +9,7 @@ import BgVideo from "../assets/landingbg.mp4"
 const HomeVideo = () => {
 
  const cool = <Box bgcolor="rgb(102, 179, 255,0.5)" border={1} borderRadius="10px">
-<Typography color={"#fff"} fontSize={"12rem"} fontFamily="Verdana" sx={{textShadow:"1px 4px 2px rgba(0,0,0,0.6)"}}>
+<Typography color={"#daf5f5"} fontSize={"12rem"} fontFamily="Verdana" sx={{textShadow:"1px 4px 2px rgba(0,0,0,0.6)"}}>
     Cool Styles
 </Typography>
 </Box>

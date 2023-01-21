@@ -30,16 +30,12 @@ const PhotoGallery = () => {
 }
 
 const hot = <Box bgcolor="rgb(255, 102, 102,0.5)" border={1} borderRadius="10px">
-<Typography color={"#fff"} fontSize={"12rem"} fontFamily="Optima" sx={{textShadow:"1px 4px 2px rgba(0,0,0,0.6)"}}>
+<Typography color={"#fcffa3"} fontSize={"12rem"} fontFamily="Verdana" sx={{textShadow:"1px 4px 2px rgba(0,0,0,0.6)"}}>
     Hot Deals
 </Typography>
 </Box>
 
-const cool = <Box bgcolor="rgb(102, 179, 255,0.5)">
-<Typography color={"#fff"} fontSize={"12rem"} fontFamily="Century Gothic" sx={{textShadow:"1px 4px 2px rgba(0,0,0,0.6)"}}>
-    Cool styles
-</Typography>
-</Box>
+
 
 export default PhotoGallery
 

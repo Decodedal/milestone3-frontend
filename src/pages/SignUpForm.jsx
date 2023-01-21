@@ -23,7 +23,7 @@ const SignUpForm = () => {
   async function handleSubmit(e){
     e.preventDefault()
 
-    await fetch('http://localhost:4000/users/',{
+    await fetch('https://style-central-bakcend.onrender.com/users/',{
         method:"POST",
         headers:{
             'Content-Type' : 'application/json'

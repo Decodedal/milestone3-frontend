@@ -8,7 +8,7 @@ function CurrentUserProvider({children}){
     useEffect(()=>{
         
         const getLoggedInnUser = async() =>{
-            let response = await fetch('http://localhost:4000/authentication/profile',{
+            let response = await fetch('https://style-central-bakcend.onrender.com/authentication/profile',{
                 headers:{
                     'Authorization':`Bearer ${localStorage.getItem('token')}`
                 }

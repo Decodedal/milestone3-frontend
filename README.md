@@ -9,3 +9,4 @@ The aim of this project is to be a stylish digital marketplace. Where users can 
 - react.js
 - react-router-dom
 - MUI 
+- react-js-spinners

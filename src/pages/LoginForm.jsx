@@ -27,7 +27,7 @@ const [errorMessage, setErrorMessage] = useState(null)
 
 const updateCartFromDB= async(data) =>{
     const cartUpdater = []
-    const resData = await fetch(`http://localhost:4000/items/${data.user_id}`)
+    const resData = await fetch(`https://style-central-bakcend.onrender.com/items/${data.user_id}`)
     const parsedData = await resData.json()
     for(let item of parsedData){
         if(item.cart === true){
@@ -44,7 +44,7 @@ const updateCartFromDB= async(data) =>{
    
 async function handleSubmit(e) {
     e.preventDefault()
-    const response = await fetch(`http://localhost:4000/authentication/`, {
+    const response = await fetch(`https://style-central-bakcend.onrender.com/authentication/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

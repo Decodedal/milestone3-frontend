@@ -19,7 +19,7 @@ const MenuLogin = ({ show }) => {
 
   const clearCartDb = async() =>{
     return(
-      await fetch(`http://localhost:4000/items/deleter/${currentUser.user_id}`,{
+      await fetch(`https://style-central-bakcend.onrender.com/items/deleter/${currentUser.user_id}`,{
         method:"POST",
         headers:{
             'Content-Type' : 'application/json'
@@ -32,7 +32,7 @@ const MenuLogin = ({ show }) => {
     //updates db cart status for departing user so it can be recovered
     const updateCartDB = async(item) =>{
       return(
-        await fetch('http://localhost:4000/items/cart',{
+        await fetch('https://style-central-bakcend.onrender.com/items/cart',{
           method:"POST",
           headers:{
               'Content-Type' : 'application/json'

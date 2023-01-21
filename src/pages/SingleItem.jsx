@@ -3,6 +3,8 @@ import { Box, Button, ButtonGroup, Divider, Stack, Typography } from '@mui/mater
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { CartContext } from '../context/CartContext'
+import { PuffLoader } from 'react-spinners'
+import { maxHeight } from '@mui/system'
 
 const SingleItem = () => {
     // gets us access to cart state so we can set cart contents
@@ -17,6 +19,7 @@ const SingleItem = () => {
     const [item , setitem] = useState([])
     const [size, setSize] = useState("select a size")
     const { cart, setCart } = useContext(CartContext)
+    const [loading, setLoading] = useState(true)
    
 
     function handleSize(size){
@@ -30,6 +33,8 @@ useEffect(()=>{
    const resdata = await fetch(`https://fakestoreapi.com/products/${id}`)
    let parsedData = await resdata.json()
    setitem(parsedData)
+   setLoading(false)
+   //removes select size options for electronics and jewlery
    if(parsedData.category === "jewelery" || parsedData.category === "electronics"){
     setSize(null)
    }
@@ -71,10 +76,23 @@ const handleAddToCart = (clickedItem) => {
 
   return (
     <>
+    {loading === true ?
+       <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+       <PuffLoader
+       color="#0000FF"
+       loading={loading}
+       size={150}
+       margin = "0 auto"
+       aria-label="Loading Spinner"
+       data-testid="loader"
+       />
+       </div>
+       :
+  
     <Stack direction={{xs:"column", md:"row"}}  height="100vh" alignItems={"center"}>
     <Stack maxHeight={"100vh"} alignItems='center' width={{xs:"100%", md:"50%"}} justifyContent="center" flex={1}>
 
-     <img style={{width:"60%"}} src={item.image} alt={item.title}/>
+     <img style={{width:"60%", maxHeight:"90vh"}} src={item.image} alt={item.title}/>
     </Stack>
     <Box width={{xs:"100%", md:"40%"}} maxHeight={"90vh"}>
     <Stack p={1} m={2} bgcolor={'white'} maxHeight={"100vh"} >
@@ -112,7 +130,7 @@ const handleAddToCart = (clickedItem) => {
     </Stack>
     </Box>
     </Stack>
-  
+  }
     </>
   )
 }

@@ -32,7 +32,7 @@ const MobilePhotoGallery = () => {
   return (
     <Box position="absolute">
         <StyledBox >
-            <Typography fontSize={"1.3rem"} fontWeight={500}>
+            <Typography fontSize={"1.3rem"} fontWeight={500} fontFamily="Verdana">
                 Shop the hottest deals of the season!
             </Typography>
         </StyledBox>
