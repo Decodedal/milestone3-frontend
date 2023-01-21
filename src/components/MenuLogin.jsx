@@ -48,15 +48,17 @@ const MenuLogin = ({ show }) => {
     }
 
     const handleLogout = async () =>{
-      await clearCartDb()
+       await clearCartDb()
       const cart = localStorage.getItem("style_central_cart")
       const workIt = JSON.parse(cart)
+      console.log(`cart ${cart}`)
+      console.log(`parsed ${workIt}`)
       for(let item of workIt){
-        updateCartDB(item)
+       await updateCartDB(item)
       }
-       localStorage.clear()
+      localStorage.clear()
       setCurrentUser(null)
-       window.location.reload()
+      window.location.reload()
     }
 
   return (
