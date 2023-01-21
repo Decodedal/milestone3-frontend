@@ -1,8 +1,6 @@
 # Store front project 
 
-## mission statment 
-
-The aim of this project is to be a stylish digital marketplace. Where users can browse our selection of goods. Add items to a favorated list and add items to a shopping cart. Possible additional functionalty will be adamin settings that allow for the creation of new goods. 
+## mission statment The aim of this project is to be a stylish digital marketplace. Where users can browse our selection of goods. Add items to a favorite list and add items to a shopping cart. Possible additional functionality will be admin settings that allow for the creation of new goods. 
 
 ## Technologies
 
